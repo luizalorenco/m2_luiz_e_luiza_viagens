@@ -35,8 +35,7 @@ bot.start(async ctx => {
   })
 
   bot.hears(regions, async ctx => {
-    await ctx.reply(` Legal!
-    Os estados dessa região são:`)
+    await ctx.reply(` Legal! Para qual estado você viajou? `)
     var message = ctx.message.text
   request(`${env.apiEstados}/${message}`, async (err, res, body) => {
    var response = JSON.parse(body)
@@ -45,14 +44,14 @@ bot.start(async ctx => {
     keyboardvalues.push(element.nome)
    });
    await ctx.reply(
-`Então, para qual estado você viajou?`,
+`Aqui estão todos dessa região:`,
     Markup.keyboard(keyboardvalues).resize().oneTime()
   )
   })})
 
  
 
-  bot.hears(states, ctx => {
+  bot.hears(['Santa Catarina', 'São Paulo'], ctx => {
     var currentstate = ctx.update.message.text
     ctx.session.currentstate = currentstate
     ctx.reply('Interessante! E qual foi o ano dessa viagem?')
@@ -61,31 +60,30 @@ bot.start(async ctx => {
   let list = []
 
   // criando um 'Inline Keyboar' dinâmico
-  // const itemsButtons = () =>
-  //   Markup.inlineKeyboard(
-  //     list.map(item => Markup.button.callback(item, `remove ${item}`)),
-  //     { columns: 3 }
-  //   )
+     const itemsButtons = () =>
+     Markup.inlineKeyboard(
+       list.map(item => Markup.button.callback(item, `remove ${item}`)),
+       { columns: 3 }
+     )
 
     
-  //     // obtendo o item e o transformando em um botão da lista
-  // bot.on('text', ctx => {
-  //   list.push(ctx.update.message.text)
-  //   console.log(list)
-  //   var currentstate = ctx.session.currentstate
-  //   ctx.reply(
-  //     `A viagem para ${currentstate} no ano de ${ctx.update.message.text} foi adicionada à lista!`,
-  //     ctx.reply('Viagem cadastrada com sucesso! O que deseja fazer agora?' ),
-  //     Markup.keyboard(actions).resize().oneTime(),
-  //     itemsButtons()
-  //   )
-  // })
+       // obtendo o item e o transformando em um botão da lista
+   bot.on('text', ctx => {
+     list.push(ctx.update.message.text)
+     console.log(list)
+     var currentstate = ctx.session.currentstate
+     ctx.reply(
+       `A viagem para ${currentstate} no ano de ${ctx.update.message.text} foi adicionada à lista! O que deseja fazer agora?`,
+       Markup.keyboard(actions).resize().oneTime(),
+       itemsButtons()
+     )})
+     
   
-  // // removendo os itens da lista quando clicar no botão
-  // bot.action(/remove (.+)/, ctx => {
-  //   list = list.filter(item => item !== ctx.match[1])
-  //   ctx.reply(`A viagem ${ctx.match[1]} foi removida da sua lista!`, itemsButtons())
-  // })
+   // removendo os itens da lista quando clicar no botão
+   bot.action(/remove (.+)/, ctx => {
+     list = list.filter(item => item !== ctx.match[1])
+     ctx.reply(`A viagem ${ctx.match[1]} foi removida da sua lista!`, itemsButtons())
+   })
 
 
   
