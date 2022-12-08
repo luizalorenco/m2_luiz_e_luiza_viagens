@@ -68,7 +68,7 @@ bot.start(async ctx => {
 
     
        // obtendo o item e o transformando em um botão da lista
-   bot.on('text', ctx => {
+     bot.on('text', ctx => {
      list.push(ctx.update.message.text)
      console.log(list)
      var currentstate = ctx.session.currentstate
