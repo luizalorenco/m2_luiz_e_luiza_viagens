@@ -85,7 +85,6 @@ bot.start(async ctx => {
      ctx.reply(`A viagem ${ctx.match[1]} foi removida da sua lista!`, itemsButtons())
    })
 
-
   
 
   bot.startPolling()
