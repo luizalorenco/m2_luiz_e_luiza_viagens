@@ -51,7 +51,33 @@ bot.start(async ctx => {
 
  
 
-  bot.hears(['Santa Catarina', 'São Paulo'], ctx => {
+  bot.hears(['Acre',
+  'Alagoas',
+  'Amapá',
+  'Amazonas',
+  'Bahia',
+  'Ceara',
+  'Distrito Federal',
+  'Espírito Santo',
+  'Goiás',
+  'Maranhão',
+  'Mato Grosso',
+  'Mato Grosso do Sul',
+  'Minas Gerais',
+'Pará',
+'Paraíba',
+'Paraná',
+  'Pernambuco',
+  'Piauí',
+'Rio de Janeiro',
+  'Rio Grande do Norte',
+  'Rio Grande do Sul',
+  'Rondônia',
+  'Roraima',
+  'Santa Catarina',
+  'São Paulo',
+'Sergipe',
+  'Tocantins'], ctx => {
     var currentstate = ctx.update.message.text
     ctx.session.currentstate = currentstate
     ctx.reply('Interessante! E qual foi o ano dessa viagem?')
@@ -68,7 +94,8 @@ bot.start(async ctx => {
 
     
        // obtendo o item e o transformando em um botão da lista
-     bot.on('text', ctx => {
+       const onlyNumbers = new RegExp('^[0-9]+$')
+     bot.hears(onlyNumbers, ctx => {
      list.push(ctx.update.message.text)
      console.log(list)
      var currentstate = ctx.session.currentstate
@@ -85,6 +112,11 @@ bot.start(async ctx => {
      ctx.reply(`A viagem ${ctx.match[1]} foi removida da sua lista!`, itemsButtons())
    })
 
+   bot.hears('Cadastrar nova viagem',
+   ctx => {
+    ctx.reply( 'Para qual região você viajou?',
+    Markup.keyboard(regions).resize().oneTime()
+   )})
   
 
   bot.startPolling()
