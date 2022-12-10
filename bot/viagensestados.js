@@ -2,6 +2,8 @@ const env = require('../.env')
 
 const { Telegraf, Markup } = require('telegraf')
 
+const fetch = require("node-fetch")
+
 const bot = new Telegraf(env.token)
 
 const LocalSession = require('telegraf-session-local')
@@ -23,6 +25,25 @@ request(`${env.apiEstados}`, async (err, res, body) => {
   });
 
  })
+
+ function getapitoken() {
+  var body = {
+    email: env.apicredentials.email, 
+    password: env.apicredentials.password
+  }
+  fetch(env.apiBase + '/users/login', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+}).then(res => res.json())
+    .then(json => return(json.token))
+    .catch (err => console.log(err))
+ }
+
+
+ console.log(getapitoken())
 
 bot.start(async ctx => {
     const from = ctx.update.message.from
@@ -99,6 +120,10 @@ bot.start(async ctx => {
      list.push(ctx.update.message.text)
      console.log(list)
      var currentstate = ctx.session.currentstate
+
+
+  
+
      ctx.reply(
        `A viagem para ${currentstate} no ano de ${ctx.update.message.text} foi adicionada à lista! O que deseja fazer agora?`,
        Markup.keyboard(actions).resize().oneTime(),
@@ -118,5 +143,10 @@ bot.start(async ctx => {
     Markup.keyboard(regions).resize().oneTime()
    )})
   
+   bot.hears('Listar viagens',
+   ctx => {
+    ctx.reply( 'Estou me esforçando para listar suas viagens, tenha calma, por favor...'
+   )})
+
 
   bot.startPolling()
