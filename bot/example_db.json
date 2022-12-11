@@ -3,13 +3,25 @@
     {
       "id": "1450408708:1450408708",
       "data": {
-        "currentstate": "Santa Catarina"
+        "currentstate": "Minas Gerais"
       }
     },
     {
       "id": "5470013193:5470013193",
       "data": {
         "currentstate": "Amazonas"
+      }
+    },
+    {
+      "id": "1175142378:1175142378",
+      "data": {
+        "currentstate": "Paraná"
+      }
+    },
+    {
+      "id": "1053391071:1053391071",
+      "data": {
+        "currentstate": "São Paulo"
       }
     }
   ]
