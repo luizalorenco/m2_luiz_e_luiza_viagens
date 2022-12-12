@@ -3,13 +3,16 @@
     {
       "id": "1450408708:1450408708",
       "data": {
-        "currentstate": "Amazonas"
+        "currentstate": null,
+        "action": null,
+        "currenttrip": null
       }
     },
     {
       "id": "5470013193:5470013193",
       "data": {
-        "currentstate": "Amazonas"
+        "currentstate": null,
+        "action": null
       }
     },
     {
@@ -21,7 +24,9 @@
     {
       "id": "1053391071:1053391071",
       "data": {
-        "currentstate": "São Paulo"
+        "currentstate": null,
+        "action": null,
+        "currenttrip": null
       }
     }
   ]

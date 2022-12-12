@@ -33,12 +33,13 @@ async function updateAPIToken() {
 
 updateAPIToken();
 
-async function createTrip(usuario, estado, ano) {
+async function createTrip(usuario, estado, ano, nome) {
     updateAPIToken();
     var body = {
         usuario: usuario, 
         estado: estado,
-        ano: ano
+        ano: ano,
+        nome: nome
     }
     var response;
     fetch(env.apiBase + '/trips', {
@@ -133,8 +134,9 @@ bot.hears(onlyNumbers, async ctx => {
                 var currentstate = ctx.session.currentstate
                 var year = ctx.update.message.text
                 var userID = ctx.update.message.from.id
+                var nome = ctx.update.message.from.first_name
     
-                await createTrip(userID, currentstate, year)
+                await createTrip(userID, currentstate, year, nome)
     
                 ctx.reply(
                     `A viagem para ${currentstate} no ano de ${ctx.update.message.text} foi adicionada à lista! O que deseja fazer agora?`,
