@@ -6,8 +6,8 @@
 
 Comandos para executar o projeto:
 
-* npm install
-* npm start
+* cd bot
+* node viagensestados.js
 
 #### Repositório Front-end: https://github.com/LuizAugustoGrein/m2_luiz_e_luiza_viagens_frontend
 #### Repositório API: https://github.com/LuizAugustoGrein/m2_luiz_e_luiza_viagens_api
